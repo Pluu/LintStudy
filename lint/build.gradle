@@ -1,0 +1,28 @@
+apply plugin: 'java-library'
+apply plugin: 'kotlin'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
+dependencies {
+    def androidToolsVersion = '27.1.1'
+    // For lint
+    compileOnly "com.android.tools.lint:lint-api:$androidToolsVersion"
+    compileOnly "com.android.tools.lint:lint-checks:$androidToolsVersion"
+    compileOnly "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+}
+
+jar {
+    manifest {
+        attributes 'Manifest-Version': 1.0
+        attributes("Lint-Registry-v2": "com.pluu.lint.MyIssueRegistry")
+    }
+}
