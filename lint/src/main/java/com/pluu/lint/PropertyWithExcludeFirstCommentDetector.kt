@@ -2,19 +2,18 @@ package com.pluu.lint
 
 import com.android.tools.lint.client.api.UElementHandler
 import com.android.tools.lint.detector.api.*
-import com.intellij.psi.PsiComment
-import com.intellij.psi.PsiJavaFile
-import com.intellij.psi.PsiWhiteSpace
-import org.jetbrains.kotlin.asJava.elements.KtLightField
+import com.intellij.psi.*
 import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.psi.psiUtil.allChildren
-import org.jetbrains.uast.*
+import org.jetbrains.uast.UClass
+import org.jetbrains.uast.UField
+import org.jetbrains.uast.asRecursiveLogString
+import org.jetbrains.uast.getUastParentOfType
 import java.util.*
 
-class PropertyWithExcludeFirstCommentDetector : Detector(), SourceCodeScanner {
+class PropertyWithExcludeFirstCommentDetector : Detector(), Detector.UastScanner {
 
-    override fun getApplicableUastTypes() =
-        listOf<Class<out UElement>>(UClass::class.java)
+    override fun getApplicableUastTypes() = listOf(UClass::class.java)
 
     override fun createUastHandler(context: JavaContext): UElementHandler {
         val isKotlin = isKotlin(context.psiFile)
@@ -48,36 +47,33 @@ class PropertyWithExcludeFirstCommentDetector : Detector(), SourceCodeScanner {
             }
 
             private fun findFieldInJava(field: UField) {
-                val startPosition = field.modifierList?.startOffsetInParent ?: 0
-                val element: UElement = field as? UElement ?: return
-
-                context.report(
-                    ISSUE,
-                    context.getRangeLocation(
-                        element,
-                        startPosition,
-                        field.textLength - startPosition
-                    ),
-                    ">>> Java"
-                )
+                val psi = field.javaPsi as? PsiField ?: return
+                val excludeOffset = psi.modifierList?.startOffsetInParent ?: 0
+                report(psi, excludeOffset)
             }
 
             private fun findFieldInKotlin(field: UField) {
-                val property = (field.javaPsi as? KtLightField)?.kotlinOrigin as? KtProperty
-                    ?: return
+                val property = (field.originalElement as? KtProperty) ?: return
 
-                val firstPosition = property.allChildren.firstOrNull {
+                val excludeOffset = property.allChildren.firstOrNull {
                     it !is PsiComment && it !is PsiWhiteSpace
                 }?.startOffsetInParent ?: 0
 
+                report(property, excludeOffset)
+            }
+
+            private fun report(psiElement: PsiElement, excludeOffset: Int) {
                 context.report(
                     ISSUE,
                     context.getRangeLocation(
-                        property,
-                        firstPosition,
-                        property.textLength - firstPosition
+                        psiElement,
+                        excludeOffset,
+                        psiElement.textLength - excludeOffset
                     ),
-                    ">>> Kotlin"
+                    """
+                        Original Element : ${psiElement.originalElement}
+                        Detect Property&Filed in ${if (isKotlin) "Kotlin" else "Java"}
+                    """.trimIndent()
                 )
             }
         }
