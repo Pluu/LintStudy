@@ -57,8 +57,9 @@ class SampleKotlin {
     ///////////////////////////////////////////////////////////////////////////
     var d4 = ""
 
+    // kotlin.NotImplementedError: An operation is not implemented: Not yet implemented
     // Late Init
-    lateinit var d5: String
+//    lateinit var d5: String
 
     fun test() {
         val a = ""
