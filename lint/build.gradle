@@ -13,11 +13,14 @@ compileKotlin {
 }
 
 dependencies {
-    def androidToolsVersion = '30.2.1'
+    def lintVersion = '30.2.1'
     // For lint
-    compileOnly "com.android.tools.lint:lint-api:$androidToolsVersion"
-    compileOnly "com.android.tools.lint:lint-checks:$androidToolsVersion"
+    compileOnly "com.android.tools.lint:lint-api:$lintVersion"
+    compileOnly "com.android.tools.lint:lint-checks:$lintVersion"
     compileOnly "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation "com.android.tools.lint:lint:$lintVersion"
+    testImplementation "com.android.tools.lint:lint-tests:$lintVersion"
 }
 
 jar {
