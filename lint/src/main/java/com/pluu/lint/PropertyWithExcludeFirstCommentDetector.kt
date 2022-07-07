@@ -2,7 +2,11 @@ package com.pluu.lint
 
 import com.android.tools.lint.client.api.UElementHandler
 import com.android.tools.lint.detector.api.*
-import com.intellij.psi.*
+import com.intellij.psi.PsiComment
+import com.intellij.psi.PsiElement
+import com.intellij.psi.PsiField
+import com.intellij.psi.PsiWhiteSpace
+import com.pluu.lint.util.classPackageName
 import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.psi.psiUtil.allChildren
 import org.jetbrains.uast.UClass
@@ -11,6 +15,7 @@ import org.jetbrains.uast.asRecursiveLogString
 import org.jetbrains.uast.getUastParentOfType
 import java.util.*
 
+@Suppress("UnstableApiUsage")
 class PropertyWithExcludeFirstCommentDetector : Detector(), Detector.UastScanner {
 
     override fun getApplicableUastTypes() = listOf(UClass::class.java)
@@ -21,7 +26,7 @@ class PropertyWithExcludeFirstCommentDetector : Detector(), Detector.UastScanner
 
             override fun visitClass(node: UClass) {
                 // 테스트 패키지내에서만 동작
-                if (classPackageName(node)?.endsWith("exclude_first_comment") == false) return
+                if (node.classPackageName?.endsWith("exclude_first_comment") == false) return
 
                 // Target Annotation 체크
                 // 활성화 여부 체크
@@ -78,9 +83,6 @@ class PropertyWithExcludeFirstCommentDetector : Detector(), Detector.UastScanner
             }
         }
     }
-
-    private fun classPackageName(node: UClass): String? =
-        (node.containingFile as? PsiJavaFile)?.packageName
 
     companion object {
         val TARGET_ANNOTATION = "com.pluu.lintstudy.SampleAnnotation"
