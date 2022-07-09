@@ -4,15 +4,12 @@ import com.android.tools.lint.client.api.UElementHandler
 import com.android.tools.lint.detector.api.*
 import com.intellij.psi.PsiComment
 import com.intellij.psi.PsiElement
-import com.intellij.psi.PsiField
 import com.intellij.psi.PsiWhiteSpace
 import com.pluu.lint.util.classPackageName
 import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.psi.psiUtil.allChildren
 import org.jetbrains.uast.UClass
-import org.jetbrains.uast.UField
 import org.jetbrains.uast.asRecursiveLogString
-import org.jetbrains.uast.getUastParentOfType
 import java.util.*
 
 @Suppress("UnstableApiUsage")
@@ -37,34 +34,23 @@ class PropertyWithExcludeFirstCommentDetector : Detector(), Detector.UastScanner
                 if (!isEnable) return
 
                 context.report(ISSUE, context.getNameLocation(node), node.asRecursiveLogString())
-                if (node.hasAnnotation(TARGET_ANNOTATION)) {
-                    val parent = node.getUastParentOfType(UClass::class.java, false)!!
-                    if (parent.hasAnnotation(TARGET_ANNOTATION)) {
-                        for (field in parent.fields) {
-                            if (isKotlin) {
-                                findFieldInKotlin(field)
-                            } else {
-                                findFieldInJava(field)
-                            }
-                        }
+
+                for (field in node.fields) {
+                    if (isKotlin) {
+                        val property = (field.originalElement as? KtProperty) ?: continue
+                        findField(property)
+                    } else {
+                        findField(field)
                     }
                 }
             }
 
-            private fun findFieldInJava(field: UField) {
-                val psi = field.javaPsi as? PsiField ?: return
-                val excludeOffset = psi.modifierList?.startOffsetInParent ?: 0
-                report(psi, excludeOffset)
-            }
-
-            private fun findFieldInKotlin(field: UField) {
-                val property = (field.originalElement as? KtProperty) ?: return
-
-                val excludeOffset = property.allChildren.firstOrNull {
+            private fun findField(field: PsiElement) {
+                val excludeOffset = field.allChildren.firstOrNull {
                     it !is PsiComment && it !is PsiWhiteSpace
                 }?.startOffsetInParent ?: 0
 
-                report(property, excludeOffset)
+                report(field, excludeOffset)
             }
 
             private fun report(psiElement: PsiElement, excludeOffset: Int) {
