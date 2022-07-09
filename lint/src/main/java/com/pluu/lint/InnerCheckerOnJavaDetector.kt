@@ -2,7 +2,9 @@ package com.pluu.lint
 
 import com.android.tools.lint.client.api.UElementHandler
 import com.android.tools.lint.detector.api.*
+import com.intellij.psi.PsiType
 import com.pluu.lint.util.classPackageName
+import com.pluu.lint.util.findTypeAndGeneric
 import org.jetbrains.uast.UClass
 import java.util.*
 
@@ -20,17 +22,20 @@ class InnerCheckerOnJavaDetector : Detector(), Detector.UastScanner {
                 if (node.classPackageName?.endsWith("innercheck") == false) return
 
                 if (isKotlin) return
-                val innerClass = node.innerClasses.mapNotNull {
+                val innerClassesQualifiedNames = node.innerClasses.mapNotNull {
                     it.qualifiedName
                 }
 
                 for (field in node.fields) {
-                    val type = field.type
-                    val typeQualifiedName = type.getCanonicalText(false)
-                    if (innerClass.contains(typeQualifiedName)) {
+                    val types: List<PsiType> = field.findTypeAndGeneric()
+                    val typesQualifiedNames = types.map {
+                        it.canonicalText
+                    }.toSet()
+
+                    if (innerClassesQualifiedNames.intersect(typesQualifiedNames).isNotEmpty()) {
                         context.report(
                             ISSUE,
-                            node,
+                            field,
                             context.getLocation(field),
                             message
                         )
