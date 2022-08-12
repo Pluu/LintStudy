@@ -1,5 +1,9 @@
 # Android Studio 에서 동작하는 Lint 공부하는 레포
 
+## Android Custom Lint
+
+https://github.com/googlesamples/android-custom-lint-rules
+
 ## Debug
 
 UAST Tree 검사
@@ -14,6 +18,35 @@ UAST Tree 검사
 >
 > Inspecting UAST Tree : https://plugins.jetbrains.com/docs/intellij/uast.html#inspecting-uast-tree
 
-## Sample
+## Sample 
 
-- [Sample, exclude first comment](exclude_first_comment.md)
+### 1) Exclude First Comment
+
+1. Java/Kotlin 파일에 존재하는 Local Property/Field를 Detect
+2. 필드 정의보다 앞에 존재하는 Document, Comment는 제외
+
+> Detector Source : [PropertyWithExcludeFirstCommentDetector](https://github.com/Pluu/LintStudy/blob/master/lint/src/main/java/com/pluu/lint/PropertyWithExcludeFirstCommentDetector.kt)
+
+#### Preview
+
+|               Kotlin                |               Java                |
+| :---------------------------------: | :-------------------------------: |
+| <img src="arts/efc_kotlin_1.png" /> | <img src="arts/efc_java_1.png" /> |
+| <img src="arts/efc_kotlin_2.png" /> | <img src="arts/efc_java_2.png" /> |
+
+### 2) Inner Class Checker On Java
+
+1. Java 클래스 내에서 선언한 필드 중 동일한 클래스 내의 Inner 타입 필드를 Detect
+
+|                         Java                          |
+| :---------------------------------------------------: |
+| <img src="arts/efc_kotlin_1.png" style="zoom:50%;" /> |
+
+### 3) Find Method With Argument
+
+1. 특정 함수 & 특정 파라미터 값을 사용하는 케이스를 Detect 
+
+|               Kotlin               |               Java               |
+| :--------------------------------: | :------------------------------: |
+| <img src="arts/fmwa_kotlin.png" /> | <img src="arts/fmwa_java.png" /> |
+
