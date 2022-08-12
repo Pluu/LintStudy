@@ -8,6 +8,7 @@ class MyIssueRegistry : IssueRegistry() {
     override val api = CURRENT_API
     override val issues = listOf(
         PropertyWithExcludeFirstCommentDetector.ISSUE,
-        InnerCheckerOnJavaDetector.ISSUE
+        InnerCheckerOnJavaDetector.ISSUE,
+        FindMethodWithArgumentDetector.ISSUE,
     )
 }
