@@ -10,5 +10,6 @@ class MyIssueRegistry : IssueRegistry() {
         PropertyWithExcludeFirstCommentDetector.ISSUE,
         InnerCheckerOnJavaDetector.ISSUE,
         FindMethodWithArgumentDetector.ISSUE,
+        SafeUseForTypedArrayDetector.ISSUE,
     )
 }
