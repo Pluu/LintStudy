@@ -38,8 +38,8 @@ UAST Tree 검사
 
 1. Java 클래스 내에서 선언한 필드 중 동일한 클래스 내의 Inner 타입 필드를 Detect
 
-|                         Java                          |
-| :---------------------------------------------------: |
+|                           Java                            |
+| :-------------------------------------------------------: |
 | <img src="arts/inner_class_java.png" style="zoom:50%;" /> |
 
 ### 3) Find Method With Argument
@@ -49,4 +49,12 @@ UAST Tree 검사
 |               Kotlin               |               Java               |
 | :--------------------------------: | :------------------------------: |
 | <img src="arts/fmwa_kotlin.png" /> | <img src="arts/fmwa_java.png" /> |
+
+### 4) Using safe 'use' functions for TypedArray
+
+1. TypedArray 사용시 AutoCloseable use 사용시 이슈
+
+|                        Kotlin                         |
+| :---------------------------------------------------: |
+| <img src="arts/sufta_kotlin.png" style="zoom:50%;" /> |
 
