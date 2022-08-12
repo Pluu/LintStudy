@@ -9,7 +9,7 @@ import org.junit.Test
 class FindMethodWithArgumentDetectorTest {
 
     @Test
-    fun testBasic() {
+    fun testJava() {
         lint().files(
             java(
                 """
@@ -37,7 +37,7 @@ class FindMethodWithArgumentDetectorTest {
     }
 
     @Test
-    fun testBasicGeneric() {
+    fun testKotlin() {
         lint().files(
             kotlin(
                 """
