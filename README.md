@@ -40,7 +40,7 @@ UAST Tree 검사
 
 |                         Java                          |
 | :---------------------------------------------------: |
-| <img src="arts/efc_kotlin_1.png" style="zoom:50%;" /> |
+| <img src="arts/inner_class_java.png" style="zoom:50%;" /> |
 
 ### 3) Find Method With Argument
 
