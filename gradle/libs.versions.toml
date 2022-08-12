@@ -1,0 +1,27 @@
+[versions]
+agp = "7.2.2"
+lint = "30.2.2"
+
+[libraries]
+android-material = "com.google.android.material:material:1.6.1"
+androidx-core = "androidx.core:core-ktx:1.8.0"
+androidx-appcompat = "androidx.appcompat:appcompat:1.5.0"
+androidx-test-junit = "androidx.test.ext:junit:1.1.3"
+androidx-test-espresso = "androidx.test.espresso:espresso-core:3.4.0"
+
+junit = "junit:junit:4.13.2"
+
+lint-api = { module = "com.android.tools.lint:lint-api", version.ref = "lint" }
+lint-checks = { module = "com.android.tools.lint:lint-checks", version.ref = "lint" }
+lint = { module = "com.android.tools.lint:lint", version.ref = "lint" }
+lint-tests = { module = "com.android.tools.lint:lint-tests", version.ref = "lint" }
+
+[bundles]
+lint-compileOnly = [
+    "lint-api",
+    "lint-checks"
+]
+lint-test = [
+    "lint",
+    "lint-tests"
+]

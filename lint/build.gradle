@@ -13,14 +13,11 @@ compileKotlin {
 }
 
 dependencies {
-    def lintVersion = '30.2.2'
-    // For lint
-    compileOnly "com.android.tools.lint:lint-api:$lintVersion"
-    compileOnly "com.android.tools.lint:lint-checks:$lintVersion"
-    testImplementation "com.android.tools.lint:lint:$lintVersion"
-    testImplementation "com.android.tools.lint:lint-tests:$lintVersion"
+    // Lint
+    compileOnly(libs.bundles.lint.compileOnly)
+    testImplementation(libs.bundles.lint.test)
 
-    testImplementation 'junit:junit:4.13.2'
+    testImplementation(libs.junit)
 }
 
 jar {
