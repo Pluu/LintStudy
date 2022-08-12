@@ -12,7 +12,7 @@ UAST Tree 검사
 
 > Enabling Internal Mode : https://plugins.jetbrains.com/docs/intellij/enabling-internal.html
 >
-> Inspecting UAST Tree﻿ : https://plugins.jetbrains.com/docs/intellij/uast.html#inspecting-uast-tree
+> Inspecting UAST Tree : https://plugins.jetbrains.com/docs/intellij/uast.html#inspecting-uast-tree
 
 ## Sample
 
