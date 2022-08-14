@@ -53,18 +53,32 @@ class PropertyWithExcludeFirstCommentDetector : Detector(), Detector.UastScanner
             report(field, excludeOffset)
         }
 
-        private fun report(psiElement: PsiElement, excludeOffset: Int) {
+        private fun report(element: PsiElement, excludeOffset: Int) {
+            // Lint 7.0 이상부터 사용
+            Incident(context, ISSUE)
+                .message("found inner type")
+                .scope(element)
+                .location(
+                    context.getRangeLocation(
+                        element,
+                        excludeOffset,
+                        element.textLength - excludeOffset
+                    )
+                )
+                .report(context)
+
+            // Lint 7.0 미만
             context.report(
                 ISSUE,
                 context.getRangeLocation(
-                    psiElement,
+                    element,
                     excludeOffset,
-                    psiElement.textLength - excludeOffset
+                    element.textLength - excludeOffset
                 ),
                 "found inner type"
                 // Debug Message
 //                """
-//                        Original Element : ${psiElement.originalElement}
+//                        Original Element : ${element.originalElement}
 //                        Detect Property&Filed in ${if (isKotlin) "Kotlin" else "Java"}
 //                    """.trimIndent()
             )
