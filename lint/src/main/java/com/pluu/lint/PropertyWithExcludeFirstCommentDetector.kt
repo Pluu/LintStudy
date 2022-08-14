@@ -61,10 +61,12 @@ class PropertyWithExcludeFirstCommentDetector : Detector(), Detector.UastScanner
                     excludeOffset,
                     psiElement.textLength - excludeOffset
                 ),
-                """
-                        Original Element : ${psiElement.originalElement}
-                        Detect Property&Filed in ${if (isKotlin) "Kotlin" else "Java"}
-                    """.trimIndent()
+                "found inner type"
+                // Debug Message
+//                """
+//                        Original Element : ${psiElement.originalElement}
+//                        Detect Property&Filed in ${if (isKotlin) "Kotlin" else "Java"}
+//                    """.trimIndent()
             )
         }
     }
