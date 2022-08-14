@@ -42,7 +42,7 @@ class SafeUseForTypedArrayDetector : Detector(), SourceCodeScanner {
             moreInfo = "https://github.com/android/android-ktx/issues/193",
             category = Category.CORRECTNESS,
             priority = 6,
-            severity = Severity.WARNING,
+            severity = Severity.ERROR,
             implementation = Implementation(
                 SafeUseForTypedArrayDetector::class.java,
                 EnumSet.of(Scope.JAVA_FILE),

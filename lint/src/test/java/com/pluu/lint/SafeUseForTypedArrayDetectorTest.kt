@@ -43,10 +43,10 @@ class SafeUseForTypedArrayDetectorTest {
             .run()
             .expect(
                 """
-                    src/test.kt:4: Warning: AndroidX core의 use extension을 사용해주세요. [SafeUseForTypedArrayDetector]
+                    src/test.kt:4: Error: AndroidX core의 use extension을 사용해주세요. [SafeUseForTypedArrayDetector]
                         context.obtainStyledAttributes(intArrayOf()).use { }
                                                                      ~~~
-                    0 errors, 1 warnings
+                    1 errors, 0 warnings
                 """.trimIndent()
             )
     }
