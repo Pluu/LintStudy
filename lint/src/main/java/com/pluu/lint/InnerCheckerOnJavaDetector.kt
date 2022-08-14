@@ -14,32 +14,37 @@ class InnerCheckerOnJavaDetector : Detector(), Detector.UastScanner {
         UClass::class.java,
     )
 
-    override fun createUastHandler(context: JavaContext): UElementHandler {
-        val isKotlin = isKotlin(context.psiFile)
-        return object : UElementHandler() {
-            override fun visitClass(node: UClass) {
-                // 테스트 패키지내에서만 동작
-                if (node.classPackageName?.endsWith("innercheck") == false) return
+    override fun createUastHandler(context: JavaContext) = object : UElementHandler() {
+        override fun visitClass(node: UClass) {
+            // 테스트 패키지내에서만 동작
+            if (node.classPackageName?.endsWith("innercheck") == false) return
 
-                if (isKotlin) return
-                val innerClassesQualifiedNames = node.innerClasses.mapNotNull {
-                    it.qualifiedName
-                }
+            // Kotlin 파일은 처리하지 않음
+            if (isKotlin(context.psiFile)) return
+            val innerClassesQualifiedNames = node.innerClasses.mapNotNull {
+                it.qualifiedName
+            }
 
-                for (field in node.fields) {
-                    val types: List<PsiType> = field.findTypeAndGeneric()
-                    val typesQualifiedNames = types.map {
-                        it.canonicalText
-                    }.toSet()
+            for (field in node.fields) {
+                val types: List<PsiType> = field.findTypeAndGeneric()
+                val typesQualifiedNames = types.map {
+                    it.canonicalText
+                }.toSet()
 
-                    if (innerClassesQualifiedNames.intersect(typesQualifiedNames).isNotEmpty()) {
-                        context.report(
-                            ISSUE,
-                            field,
-                            context.getLocation(field),
-                            message
-                        )
-                    }
+                if (innerClassesQualifiedNames.intersect(typesQualifiedNames).isNotEmpty()) {
+                    // Lint 7.0 이상부터 사용
+                    val incident = Incident(context, ISSUE)
+                        .message(message)
+                        .at(field)
+                    context.report(incident)
+
+                    // Lint 7.0 미만
+//                    context.report(
+//                        ISSUE,
+//                        field,
+//                        context.getLocation(field),
+//                        message
+//                    )
                 }
             }
         }
