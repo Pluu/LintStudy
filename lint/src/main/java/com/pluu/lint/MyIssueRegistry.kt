@@ -11,5 +11,6 @@ class MyIssueRegistry : IssueRegistry() {
         InnerCheckerOnJavaDetector.ISSUE,
         FindMethodWithArgumentDetector.ISSUE,
         SafeUseForTypedArrayDetector.ISSUE,
+        PreferencesKeyDetector.ISSUE,
     )
 }

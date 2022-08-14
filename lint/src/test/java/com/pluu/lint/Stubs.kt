@@ -27,4 +27,18 @@ object Stubs {
             annotation class SampleAnnotation(val isEnabled: Boolean = true)
         """.trimIndent()
     ).indented().within("src")
+
+    val SharedPreferences_edit : TestFile = LintDetectorTest.kotlin(
+        "androidx/core/content/SharedPreferences.kt",
+        """
+            package androidx.core.content
+            import android.content.SharedPreferences
+
+            public inline fun SharedPreferences.edit(
+                commit: Boolean = false,
+                action: SharedPreferences.Editor.() -> Unit
+            ) {
+            }
+        """.trimIndent()
+    ).indented().within("src")
 }
