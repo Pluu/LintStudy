@@ -68,20 +68,20 @@ class PropertyWithExcludeFirstCommentDetector : Detector(), Detector.UastScanner
                 .report(context)
 
             // Lint 7.0 미만
-            context.report(
-                ISSUE,
-                context.getRangeLocation(
-                    element,
-                    excludeOffset,
-                    element.textLength - excludeOffset
-                ),
-                "found inner type"
+//            context.report(
+//                ISSUE,
+//                context.getRangeLocation(
+//                    element,
+//                    excludeOffset,
+//                    element.textLength - excludeOffset
+//                ),
+//                "found inner type"
                 // Debug Message
 //                """
 //                        Original Element : ${element.originalElement}
 //                        Detect Property&Filed in ${if (isKotlin) "Kotlin" else "Java"}
 //                    """.trimIndent()
-            )
+//            )
         }
     }
 
