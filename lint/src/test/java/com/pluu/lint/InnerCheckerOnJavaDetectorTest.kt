@@ -26,7 +26,7 @@ class InnerCheckerOnJavaDetectorTest {
                             A
                         }
                     }
-                    """
+                """.trimIndent()
             ).indented()
         )
             .issues(InnerCheckerOnJavaDetector.ISSUE)
@@ -75,7 +75,7 @@ class InnerCheckerOnJavaDetectorTest {
                             A
                         }
                     }
-                    """
+                """.trimIndent()
             ).indented()
         )
             .issues(InnerCheckerOnJavaDetector.ISSUE)

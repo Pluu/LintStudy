@@ -9,7 +9,6 @@ import com.pluu.lint.util.classPackageName
 import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.psi.psiUtil.allChildren
 import org.jetbrains.uast.UClass
-import org.jetbrains.uast.asRecursiveLogString
 import java.util.*
 
 @Suppress("UnstableApiUsage")
@@ -17,56 +16,56 @@ class PropertyWithExcludeFirstCommentDetector : Detector(), Detector.UastScanner
 
     override fun getApplicableUastTypes() = listOf(UClass::class.java)
 
-    override fun createUastHandler(context: JavaContext): UElementHandler {
-        val isKotlin = isKotlin(context.psiFile)
-        return object : UElementHandler() {
+    override fun createUastHandler(context: JavaContext) = object : UElementHandler() {
 
-            override fun visitClass(node: UClass) {
-                // 테스트 패키지내에서만 동작
-                if (node.classPackageName?.endsWith("exclude_first_comment") == false) return
+        private val isKotlin = isKotlin(context.psiFile)
 
-                // Target Annotation 체크
-                // 활성화 여부 체크
-                val attribute = node.findAnnotation(TARGET_ANNOTATION)
-                    ?.findAttributeValue(ATTR_VALUE) ?: return
-                val isEnable = ConstantEvaluator.evaluate(context, attribute) as? Boolean ?: false
+        override fun visitClass(node: UClass) {
+            // 테스트 패키지내에서만 동작
+            if (node.classPackageName?.endsWith("exclude_first_comment") == false) return
 
-                if (!isEnable) return
+            // Target Annotation 체크
+            // 활성화 여부 체크
+            val attribute = node.findAnnotation(TARGET_ANNOTATION)
+                ?.findAttributeValue(ATTR_VALUE) ?: return
+            val isEnable = ConstantEvaluator.evaluate(context, attribute) as? Boolean ?: false
 
-                context.report(ISSUE, context.getNameLocation(node), node.asRecursiveLogString())
+            if (!isEnable) return
 
-                for (field in node.fields) {
-                    if (isKotlin) {
-                        val property = (field.originalElement as? KtProperty) ?: continue
-                        findField(property)
-                    } else {
-                        findField(field)
-                    }
+            // Debugging
+//            context.report(ISSUE, context.getNameLocation(node), node.asRecursiveLogString())
+
+            for (field in node.fields) {
+                if (isKotlin) {
+                    val property = (field.originalElement as? KtProperty) ?: continue
+                    findField(property)
+                } else {
+                    findField(field)
                 }
             }
+        }
 
-            private fun findField(field: PsiElement) {
-                val excludeOffset = field.allChildren.firstOrNull {
-                    it !is PsiComment && it !is PsiWhiteSpace
-                }?.startOffsetInParent ?: 0
+        private fun findField(field: PsiElement) {
+            val excludeOffset = field.allChildren.firstOrNull {
+                it !is PsiComment && it !is PsiWhiteSpace
+            }?.startOffsetInParent ?: 0
 
-                report(field, excludeOffset)
-            }
+            report(field, excludeOffset)
+        }
 
-            private fun report(psiElement: PsiElement, excludeOffset: Int) {
-                context.report(
-                    ISSUE,
-                    context.getRangeLocation(
-                        psiElement,
-                        excludeOffset,
-                        psiElement.textLength - excludeOffset
-                    ),
-                    """
+        private fun report(psiElement: PsiElement, excludeOffset: Int) {
+            context.report(
+                ISSUE,
+                context.getRangeLocation(
+                    psiElement,
+                    excludeOffset,
+                    psiElement.textLength - excludeOffset
+                ),
+                """
                         Original Element : ${psiElement.originalElement}
                         Detect Property&Filed in ${if (isKotlin) "Kotlin" else "Java"}
                     """.trimIndent()
-                )
-            }
+            )
         }
     }
 

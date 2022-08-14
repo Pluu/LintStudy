@@ -7,9 +7,7 @@ import java.util.*
 
 @Suppress("UnstableApiUsage")
 class FindMethodWithArgumentDetector : Detector(), SourceCodeScanner {
-    override fun getApplicableMethodNames(): List<String> {
-        return listOf(DETECT_METHOD_NAME)
-    }
+    override fun getApplicableMethodNames() = listOf(DETECT_METHOD_NAME)
 
     override fun visitMethodCall(
         context: JavaContext,

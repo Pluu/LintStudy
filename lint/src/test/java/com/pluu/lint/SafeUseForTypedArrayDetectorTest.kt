@@ -18,7 +18,7 @@ class SafeUseForTypedArrayDetectorTest {
                     private fun test(context: Context) {
                         context.obtainStyledAttributes(intArrayOf()).use { }
                     }
-                    """
+                """.trimIndent()
             ).indented()
         )
             .issues(SafeUseForTypedArrayDetector.ISSUE)
@@ -36,7 +36,7 @@ class SafeUseForTypedArrayDetectorTest {
                     private fun test(context: Context) {
                         context.obtainStyledAttributes(intArrayOf()).use { }
                     }
-                    """
+                """.trimIndent()
             ).indented()
         )
             .issues(SafeUseForTypedArrayDetector.ISSUE)

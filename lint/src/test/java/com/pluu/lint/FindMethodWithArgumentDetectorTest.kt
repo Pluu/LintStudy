@@ -12,7 +12,7 @@ class FindMethodWithArgumentDetectorTest {
     fun testJava() {
         lint().files(
             java(
-                """
+            """
                     import java.util.List;
 
                     public class TestClass {
@@ -21,7 +21,7 @@ class FindMethodWithArgumentDetectorTest {
                             list.indexOf(1);
                         }
                     }
-                    """
+                """.trimIndent()
             ).indented()
         )
             .issues(FindMethodWithArgumentDetector.ISSUE)
@@ -45,7 +45,7 @@ class FindMethodWithArgumentDetectorTest {
                         list.indexOf(0)
                         list.indexOf(1)
                     }
-                    """
+                """.trimIndent()
             ).indented()
         )
             .issues(FindMethodWithArgumentDetector.ISSUE)
