@@ -19,10 +19,15 @@ class SafeUseForTypedArrayDetector : Detector(), SourceCodeScanner {
             if (node.methodPackageName() == "androidx.core.content.res") return
             if (node.receiverType?.canonicalText != "android.content.res.TypedArray") return
 
+            // Lint 7.0 이상부터 사용
             val incident = Incident(context, ISSUE)
                 .message(message)
                 .at(node.methodIdentifier!!)
             context.report(incident)
+
+            // Lint 7.0 미만
+//            val element = node.methodIdentifier ?: return
+//            context.report(ISSUE, element, context.getLocation(element), message)
         }
     }
 
