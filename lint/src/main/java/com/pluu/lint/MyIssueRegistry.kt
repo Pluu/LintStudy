@@ -12,5 +12,6 @@ class MyIssueRegistry : IssueRegistry() {
         FindMethodWithArgumentDetector.ISSUE,
         SafeUseForTypedArrayDetector.ISSUE,
         PreferencesKeyDetector.ISSUE,
+        ViewModelScopeLaunchDetector.ISSUE,
     )
 }
