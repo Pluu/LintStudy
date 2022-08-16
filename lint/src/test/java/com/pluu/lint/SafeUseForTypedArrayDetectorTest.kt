@@ -2,6 +2,7 @@ package com.pluu.lint
 
 import com.android.tools.lint.checks.infrastructure.TestFiles.kotlin
 import com.android.tools.lint.checks.infrastructure.TestLintTask.lint
+import com.pluu.lint.stubs.Stubs
 import org.junit.Test
 
 @Suppress("UnstableApiUsage")
