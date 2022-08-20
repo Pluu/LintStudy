@@ -14,5 +14,6 @@ class MyIssueRegistry : IssueRegistry() {
         PreferencesKeyDetector.ISSUE,
         ViewModelScopeLaunchDetector.ISSUE,
         RequiredCustomViewAttributeDetector.ISSUE,
+        TypoMethodInComponentDetector.ISSUE,
     )
 }
