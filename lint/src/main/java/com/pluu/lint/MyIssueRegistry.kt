@@ -13,5 +13,6 @@ class MyIssueRegistry : IssueRegistry() {
         SafeUseForTypedArrayDetector.ISSUE,
         PreferencesKeyDetector.ISSUE,
         ViewModelScopeLaunchDetector.ISSUE,
+        RequiredCustomViewAttributeDetector.ISSUE,
     )
 }
