@@ -36,7 +36,7 @@ UAST Tree 검사
 
 ### 2) Inner Class Checker On Java
 
-1. Java 클래스 내에서 선언한 필드 중 동일한 클래스 내의 Inner 타입 필드를 Detect
+Java 클래스 내에서 선언한 필드 중 동일한 클래스 내의 Inner 타입 필드를 Detect
 
 |                           Java                            |
 | :-------------------------------------------------------: |
@@ -44,7 +44,7 @@ UAST Tree 검사
 
 ### 3) Find Method With Argument
 
-1. 특정 함수 & 특정 파라미터 값을 사용하는 케이스를 Detect 
+특정 함수 & 특정 파라미터 값을 사용하는 케이스를 Detect 
 
 |               Kotlin               |               Java               |
 | :--------------------------------: | :------------------------------: |
@@ -52,9 +52,14 @@ UAST Tree 검사
 
 ### 4) Using safe 'use' functions for TypedArray
 
-1. TypedArray 사용시 AutoCloseable use 사용시 이슈
+TypedArray 사용시 AutoCloseable use 사용시 이슈
 
 |                        Kotlin                         |
 | :---------------------------------------------------: |
 | <img src="arts/sufta_kotlin.png" style="zoom:50%;" /> |
 
+### 5 Required attribute in CustomView
+
+|   XML   |
+| :--: |
+| <img src="arts/required_attribute.png"  /> |
