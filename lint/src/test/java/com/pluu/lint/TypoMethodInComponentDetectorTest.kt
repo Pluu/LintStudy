@@ -1,6 +1,7 @@
 package com.pluu.lint
 
 import com.android.tools.lint.checks.infrastructure.LintDetectorTest
+import com.android.tools.lint.checks.infrastructure.TestMode
 import com.pluu.lint.stubs.FRAGMENT_STUB
 import org.junit.Test
 
@@ -108,17 +109,8 @@ class TypoMethodInComponentDetectorTest : LintDetectorTest() {
 
         lint().files(
             file
-        ).run()
-            .expect(
-                """
-                    src/TypoActivitySample.kt:4: Warning: setupviews org.jetbrains.uast.kotlin.KotlinUMethod@410de611 [TypoMethodInComponentDetector]
-                        fun setupviews() {
-                            ~~~~~~~~~~
-                    src/TypoActivitySample.kt:8: Warning: setupobservers org.jetbrains.uast.kotlin.KotlinUMethod@7d9c4a80 [TypoMethodInComponentDetector]
-                        fun setupobservers() {
-                            ~~~~~~~~~~~~~~
-                    0 errors, 2 warnings
-                """.trimIndent()
-            )
+        ).testModes(TestMode.UI_INJECTION_HOST)
+            .run()
+            .expectWarningCount(2)
     }
 }
