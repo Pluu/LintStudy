@@ -4,6 +4,7 @@ plugins {
 }
 
 android {
+    namespace 'com.pluu.lintstudy'
     compileSdk 32
 
     defaultConfig {
