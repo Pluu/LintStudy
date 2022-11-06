@@ -54,12 +54,18 @@ Java 클래스 내에서 선언한 필드 중 동일한 클래스 내의 Inner �
 
 TypedArray 사용시 AutoCloseable use 사용시 이슈
 
-|                        Kotlin                         |
-| :---------------------------------------------------: |
-| <img src="arts/sufta_kotlin.png" style="zoom:50%;" /> |
+|                Kotlin                |
+| :----------------------------------: |
+| <img src="arts/sufta_kotlin.png"  /> |
 
 ### 5 Required attribute in CustomView
 
 |   XML   |
 | :--: |
-| <img src="arts/required_attribute.png"  /> |
+| <img src="arts/required_attribute.png" /> |
+
+### 6 Cannot be used for LiveData<Nothing>
+
+|                        Kotlin                         |
+| :---------------------------------------------------: |
+| <img src="arts/LiveDataObserveNotNullDetector.png" /> |
