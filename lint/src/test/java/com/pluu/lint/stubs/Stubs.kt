@@ -3,6 +3,8 @@
 package com.pluu.lint.stubs
 
 import com.android.tools.lint.checks.infrastructure.LintDetectorTest
+import com.android.tools.lint.checks.infrastructure.LintDetectorTest.java
+import com.android.tools.lint.checks.infrastructure.LintDetectorTest.kotlin
 import com.android.tools.lint.checks.infrastructure.TestFile
 
 object Stubs {
@@ -42,3 +44,64 @@ object Stubs {
         """.trimIndent()
     ).indented().within("src")
 }
+
+private val COMPONENT_ACTIVITY = java(
+    """
+package androidx.activity;
+
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleOwner;
+
+public class ComponentActivity {
+}
+"""
+)
+
+private val LIFECYCLE = kotlin(
+    "androidx/lifecycle/Lifecycle.kt",
+    """
+package androidx.lifecycle;
+
+abstract class Lifecycle {
+    enum class State { CREATED, STARTED }
+    fun isAtLeast(state: State): Boolean {
+        return true
+    }
+}
+    """
+).indented().within("src")
+
+private val LIVEDATA = java(
+    """package androidx.lifecycle;
+
+public abstract class LiveData<T> {
+    public void observe(LifecycleOwner owner, Observer<? super T> observer) {}
+}
+"""
+)
+
+private val MUTABLE_LIVEDATA = java(
+    """
+package androidx.lifecycle;
+
+public class MutableLiveData<T> extends LiveData<T> { }
+"""
+)
+
+private val LIFECYCLE_OWNER = java(
+    """
+package androidx.lifecycle;
+
+public interface LifecycleOwner {
+    Lifecycle getLifecycle();
+}
+"""
+)
+
+internal val LIVEDATA_STUBS = arrayOf(
+    COMPONENT_ACTIVITY,
+    LIFECYCLE,
+    LIVEDATA,
+    MUTABLE_LIVEDATA,
+    LIFECYCLE_OWNER
+)

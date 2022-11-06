@@ -15,5 +15,6 @@ class MyIssueRegistry : IssueRegistry() {
         ViewModelScopeLaunchDetector.ISSUE,
         RequiredCustomViewAttributeDetector.ISSUE,
         TypoMethodInComponentDetector.ISSUE,
+        LiveDataObserveNotNullDetector.ISSUE,
     )
 }
