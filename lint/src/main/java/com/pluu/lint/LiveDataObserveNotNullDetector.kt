@@ -23,6 +23,15 @@ class LiveDataObserveNotNullDetector : Detector(), SourceCodeScanner {
             val incident = Incident(context, ISSUE)
                 .message(message)
                 .at(node.methodIdentifier!!)
+                .fix(
+                    fix()
+                        .name("Use observe function")
+                        .replace()
+                        .text(node.methodName)
+                        .with("observe")
+                        .reformat(true)
+                        .build()
+                )
             context.report(incident)
         }
     }

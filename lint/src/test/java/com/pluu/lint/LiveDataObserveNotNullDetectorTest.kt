@@ -84,6 +84,17 @@ src/SampleActivity.kt:13: Error: LiveData<Nothing>에는 observeNotNull을 사�
                 ~~~~~~~~~~~~~~
 2 errors, 0 warnings
                 """.trimIndent()
+            ).expectFixDiffs(
+                """
+Fix for src/SampleActivity.kt line 11: Use observe function:
+@@ -11 +11
+-         sample.observeNotNull(this) {
++         sample.observe(this) {
+Fix for src/SampleActivity.kt line 13: Use observe function:
+@@ -13 +13
+-         sample2.observeNotNull(this) {
++         sample2.observe(this) {
+            """.trimIndent()
             )
     }
 }
