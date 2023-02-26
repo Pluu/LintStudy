@@ -20,8 +20,9 @@ class TypoMethodInComponentDetector : Detector(), SourceCodeScanner {
         super.visitClass(context, declaration)
 
         declaration.methods.asSequence()
-            .map { it.toUElement() }
-            .filterNot {
+            .mapNotNull {
+                it.toUElement()
+            }.filterNot {
                 it is KotlinConstructorUMethod
             }.mapNotNull {
                 it as? UMethod
