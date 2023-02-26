@@ -15,6 +15,7 @@ compileKotlin {
 dependencies {
     // Lint
     compileOnly(libs.bundles.lint.compileOnly)
+    compileOnly(libs.kotlin.stdlib)
     testImplementation(libs.bundles.lint.test)
 
     testImplementation(libs.junit)
