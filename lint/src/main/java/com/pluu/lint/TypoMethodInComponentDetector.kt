@@ -1,10 +1,7 @@
 package com.pluu.lint
 
 import com.android.tools.lint.detector.api.*
-import org.jetbrains.uast.UClass
-import org.jetbrains.uast.UMethod
-import org.jetbrains.uast.kotlin.KotlinConstructorUMethod
-import org.jetbrains.uast.toUElement
+import org.jetbrains.uast.*
 import java.util.*
 
 @Suppress("UnstableApiUsage")
@@ -20,13 +17,7 @@ class TypoMethodInComponentDetector : Detector(), SourceCodeScanner {
         super.visitClass(context, declaration)
 
         declaration.methods.asSequence()
-            .mapNotNull {
-                it.toUElement()
-            }.filterNot {
-                it is KotlinConstructorUMethod
-            }.mapNotNull {
-                it as? UMethod
-            }.forEach { method ->
+            .forEach { method ->
                 val methodName = method.name
 
                 val findSetUpViews = setUpViews_method.equals(methodName, ignoreCase = true)
@@ -51,7 +42,7 @@ class TypoMethodInComponentDetector : Detector(), SourceCodeScanner {
             .build()
 
         Incident(context, ISSUE)
-            .message(method.name + " " + method)
+            .message(MESSAGE)
             .fix(fix)
             .at(method)
             .report(context)
@@ -61,12 +52,13 @@ class TypoMethodInComponentDetector : Detector(), SourceCodeScanner {
 
         private const val setUpViews_method = "setUpViews"
         private const val setUpObservers_method = "setUpObservers"
+        private const val MESSAGE = "오타 수정 필요"
 
         @JvmField
         val ISSUE = Issue.create(
             id = "TypoMethodInComponentDetector",
             briefDescription = "Update",
-            explanation = "오타 수정 필요",
+            explanation = MESSAGE,
             category = Category.CORRECTNESS,
             priority = 10,
             severity = Severity.WARNING,

@@ -111,6 +111,16 @@ class TypoMethodInComponentDetectorTest : LintDetectorTest() {
             file
         ).testModes(TestMode.UI_INJECTION_HOST)
             .run()
-            .expectWarningCount(2)
+            .expect(
+                """
+                    src/TypoActivitySample.kt:4: Warning: 오타 수정 필요 [TypoMethodInComponentDetector]
+                        fun setupviews() {
+                            ~~~~~~~~~~
+                    src/TypoActivitySample.kt:8: Warning: 오타 수정 필요 [TypoMethodInComponentDetector]
+                        fun setupobservers() {
+                            ~~~~~~~~~~~~~~
+                    0 errors, 2 warnings
+                """.trimIndent()
+            )
     }
 }
