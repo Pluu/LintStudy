@@ -2,24 +2,23 @@
 
 package com.pluu.lint.stubs
 
-import com.android.tools.lint.checks.infrastructure.LintDetectorTest
 import com.android.tools.lint.checks.infrastructure.LintDetectorTest.java
 import com.android.tools.lint.checks.infrastructure.LintDetectorTest.kotlin
 import com.android.tools.lint.checks.infrastructure.TestFile
 
 object Stubs {
-    val TYPEDARRAY_USE: TestFile = LintDetectorTest.kotlin(
+    val TYPEDARRAY_USE: TestFile = kotlin(
         "androidx/core/content/res/TypedArray.kt",
         """
             package androidx.core.content.res
             import android.content.res.TypedArray             
-            public inline fun <R> TypedArray.use(block: (TypedArray) -> R): R {
+            inline fun <R> TypedArray.use(block: (TypedArray) -> R): R {
                 return block(this)
             }
         """.trimIndent()
     ).indented().within("src")
 
-    val SAMPLE_ANNOTATION: TestFile = LintDetectorTest.kotlin(
+    val SAMPLE_ANNOTATION: TestFile = kotlin(
         "com/pluu/lintstudy/SampleAnnotation.kt",
         """
             package com.pluu.lintstudy
@@ -30,7 +29,7 @@ object Stubs {
         """.trimIndent()
     ).indented().within("src")
 
-    val SharedPreferences_edit : TestFile = LintDetectorTest.kotlin(
+    val SharedPreferences_edit: TestFile = kotlin(
         "androidx/core/content/SharedPreferences.kt",
         """
             package androidx.core.content
@@ -60,7 +59,7 @@ public class ComponentActivity {
 private val LIFECYCLE = kotlin(
     "androidx/lifecycle/Lifecycle.kt",
     """
-package androidx.lifecycle;
+package androidx.lifecycle
 
 abstract class Lifecycle {
     enum class State { CREATED, STARTED }
