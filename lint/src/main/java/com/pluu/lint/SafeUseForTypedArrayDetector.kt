@@ -32,7 +32,7 @@ class SafeUseForTypedArrayDetector : Detector(), SourceCodeScanner {
     }
 
     companion object {
-        private val message = "AndroidX core의 use extension을 사용해주세요."
+        private const val message = "AndroidX core의 use extension을 사용해주세요."
 
         @JvmField
         val ISSUE = Issue.create(

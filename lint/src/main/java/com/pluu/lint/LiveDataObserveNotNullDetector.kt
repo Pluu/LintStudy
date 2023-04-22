@@ -37,7 +37,7 @@ class LiveDataObserveNotNullDetector : Detector(), SourceCodeScanner {
     }
 
     companion object {
-        private val message = "LiveData<Nothing>에는 observeNotNull을 사용할 수 없습니다."
+        private const val message = "LiveData<Nothing>에는 observeNotNull을 사용할 수 없습니다."
 
         // LiveData<Nothing> ==> androidx.lifecycle.LiveData
         // MutableLiveData<Nothing> ==> androidx.lifecycle.MutableLiveData

@@ -129,7 +129,7 @@ class PreferencesKeyDetector : Detector(), SourceCodeScanner {
             "getStringSet",
         )
 
-        private val message = "Preferences Key/Value 정의가 올바르지 않음"
+        private const val message = "Preferences Key/Value 정의가 올바르지 않음"
 
         @JvmField
         val ISSUE = Issue.create(

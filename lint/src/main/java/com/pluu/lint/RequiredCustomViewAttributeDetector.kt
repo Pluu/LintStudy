@@ -35,7 +35,7 @@ class RequiredCustomViewAttributeDetector : LayoutDetector() {
     companion object {
         private const val DETECT_ATTRIBUTE = "exampleDrawable"
 
-        private val message = "$DETECT_ATTRIBUTE 속성이 필수인 케이스"
+        private const val message = "$DETECT_ATTRIBUTE 속성이 필수인 케이스"
 
         @JvmField
         val ISSUE = Issue.create(

@@ -34,7 +34,7 @@ class ViewModelScopeLaunchDetector : Detector(), SourceCodeScanner {
     }
 
     companion object {
-        private val message = "Detect ViewModelScope launch"
+        private const val message = "Detect ViewModelScope launch"
 
         val ISSUE = Issue.create(
             id = "ViewModelScopeLaunchDetector",

@@ -38,7 +38,7 @@ class FindMethodWithArgumentDetector : Detector(), SourceCodeScanner {
     companion object {
         private const val DETECT_METHOD_NAME = "indexOf"
 
-        private val message = "특정 메소드& 특정 값을 사용하는 케이스"
+        private const val message = "특정 메소드& 특정 값을 사용하는 케이스"
 
         @JvmField
         val ISSUE = Issue.create(

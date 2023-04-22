@@ -51,7 +51,7 @@ class InnerCheckerOnJavaDetector : Detector(), Detector.UastScanner {
     }
 
     companion object {
-        private val message = "얘네들 inner 타입"
+        private const val message = "얘네들 inner 타입"
 
         @JvmField
         val ISSUE = Issue.create(

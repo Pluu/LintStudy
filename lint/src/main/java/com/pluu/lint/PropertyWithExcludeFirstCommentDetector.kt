@@ -86,8 +86,8 @@ class PropertyWithExcludeFirstCommentDetector : Detector(), Detector.UastScanner
     }
 
     companion object {
-        val TARGET_ANNOTATION = "com.pluu.lintstudy.SampleAnnotation"
-        val ATTR_VALUE = "isEnabled"
+        private const val TARGET_ANNOTATION = "com.pluu.lintstudy.SampleAnnotation"
+        private const val ATTR_VALUE = "isEnabled"
 
         val ISSUE = Issue.create(
             id = "SampleDetector",
