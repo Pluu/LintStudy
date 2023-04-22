@@ -5,7 +5,6 @@ import com.android.tools.lint.checks.infrastructure.TestLintTask.lint
 import com.pluu.lint.stubs.LIVEDATA_STUBS
 import org.junit.Test
 
-@Suppress("UnstableApiUsage")
 class LiveDataObserveNotNullDetectorTest {
     @Test
     fun testSuccess() {

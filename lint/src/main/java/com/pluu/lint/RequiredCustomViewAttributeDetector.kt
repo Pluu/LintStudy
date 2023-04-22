@@ -1,11 +1,17 @@
 package com.pluu.lint
 
 import com.android.SdkConstants.AUTO_URI
-import com.android.tools.lint.detector.api.*
+import com.android.tools.lint.detector.api.Category
+import com.android.tools.lint.detector.api.Implementation
+import com.android.tools.lint.detector.api.Incident
+import com.android.tools.lint.detector.api.Issue
+import com.android.tools.lint.detector.api.LayoutDetector
+import com.android.tools.lint.detector.api.Scope
+import com.android.tools.lint.detector.api.Severity
+import com.android.tools.lint.detector.api.XmlContext
 import org.w3c.dom.Element
 
 
-@Suppress("UnstableApiUsage")
 class RequiredCustomViewAttributeDetector : LayoutDetector() {
 
     override fun getApplicableElements() = listOf(

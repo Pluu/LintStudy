@@ -5,7 +5,6 @@ import com.android.tools.lint.checks.infrastructure.TestMode
 import com.pluu.lint.stubs.FRAGMENT_STUB
 import org.junit.Test
 
-@Suppress("UnstableApiUsage")
 class TypoMethodInComponentDetectorTest : LintDetectorTest() {
 
     override fun getDetector() = TypoMethodInComponentDetector()

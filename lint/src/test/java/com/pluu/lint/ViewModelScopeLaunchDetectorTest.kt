@@ -6,7 +6,6 @@ import com.pluu.lint.stubs.CoroutineStub
 import com.pluu.lint.stubs.ViewModelStub
 import org.junit.Test
 
-@Suppress("UnstableApiUsage")
 class ViewModelScopeLaunchDetectorTest {
     @Test
     fun detectViewModelScope() {

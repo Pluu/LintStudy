@@ -5,7 +5,6 @@ import com.android.tools.lint.checks.infrastructure.TestFiles.kotlin
 import com.android.tools.lint.checks.infrastructure.TestLintTask.lint
 import org.junit.Test
 
-@Suppress("UnstableApiUsage")
 class FindMethodWithArgumentDetectorTest {
 
     @Test

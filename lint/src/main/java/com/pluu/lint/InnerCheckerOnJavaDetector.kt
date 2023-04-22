@@ -1,14 +1,21 @@
 package com.pluu.lint
 
 import com.android.tools.lint.client.api.UElementHandler
-import com.android.tools.lint.detector.api.*
+import com.android.tools.lint.detector.api.Category
+import com.android.tools.lint.detector.api.Detector
+import com.android.tools.lint.detector.api.Implementation
+import com.android.tools.lint.detector.api.Incident
+import com.android.tools.lint.detector.api.Issue
+import com.android.tools.lint.detector.api.JavaContext
+import com.android.tools.lint.detector.api.Scope
+import com.android.tools.lint.detector.api.Severity
+import com.android.tools.lint.detector.api.isKotlin
 import com.intellij.psi.PsiType
 import com.pluu.lint.util.classPackageName
 import com.pluu.lint.util.findTypeAndGeneric
 import org.jetbrains.uast.UClass
-import java.util.*
+import java.util.EnumSet
 
-@Suppress("UnstableApiUsage")
 class InnerCheckerOnJavaDetector : Detector(), Detector.UastScanner {
     override fun getApplicableUastTypes() = listOf(
         UClass::class.java,

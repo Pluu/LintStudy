@@ -5,7 +5,6 @@ import com.android.tools.lint.checks.infrastructure.TestLintTask.lint
 import com.pluu.lint.stubs.Stubs
 import org.junit.Test
 
-@Suppress("UnstableApiUsage")
 class SafeUseForTypedArrayDetectorTest {
     @Test
     fun testSuccess() {

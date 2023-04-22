@@ -1,5 +1,3 @@
-@file:Suppress("UnstableApiUsage")
-
 package com.pluu.lint.stubs
 
 import com.android.tools.lint.checks.infrastructure.LintDetectorTest

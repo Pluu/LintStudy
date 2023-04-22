@@ -4,7 +4,6 @@ import com.android.tools.lint.checks.infrastructure.TestFiles.xml
 import com.android.tools.lint.checks.infrastructure.TestLintTask.lint
 import org.junit.Test
 
-@Suppress("UnstableApiUsage")
 class RequiredCustomViewAttributeDetectorTest {
 
     @Test
