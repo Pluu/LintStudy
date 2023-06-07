@@ -3,6 +3,7 @@ package com.pluu.lint
 import com.android.tools.lint.checks.infrastructure.TestFiles.java
 import com.android.tools.lint.checks.infrastructure.TestFiles.kotlin
 import com.android.tools.lint.checks.infrastructure.TestLintTask.lint
+import com.android.tools.lint.checks.infrastructure.TestMode
 import com.pluu.lint.stubs.Stubs
 import org.junit.Test
 
@@ -63,6 +64,7 @@ class PropertyWithExcludeFirstCommentDetectorTest {
             ).indented()
         )
             .issues(PropertyWithExcludeFirstCommentDetector.ISSUE)
+            .skipTestModes(TestMode.SUPPRESSIBLE)
             .run()
             .expect(
                 """
@@ -236,6 +238,7 @@ class PropertyWithExcludeFirstCommentDetectorTest {
             ).indented()
         )
             .issues(PropertyWithExcludeFirstCommentDetector.ISSUE)
+            .skipTestModes(TestMode.SUPPRESSIBLE)
             .run()
             .expect(
                 """
