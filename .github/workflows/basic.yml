@@ -23,4 +23,4 @@ jobs:
       #  run: yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "build-tools;34.0.0-rc3"
       #  shell: bash
       - name: Build with Gradle
-        run: ./gradlew build :lint:test
+        run: ./gradlew :lint:build :lint:test
