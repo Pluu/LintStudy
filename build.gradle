@@ -4,6 +4,6 @@ plugins {
     alias(libs.plugins.kotlin.android) apply false
 }
 
-task clean(type: Delete) {
+tasks.register('clean', Delete) {
     delete rootProject.buildDir
 }
