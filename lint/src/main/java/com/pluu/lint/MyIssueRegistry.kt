@@ -16,5 +16,6 @@ class MyIssueRegistry : IssueRegistry() {
         RequiredCustomViewAttributeDetector.ISSUE,
         TypoMethodInComponentDetector.ISSUE,
         LiveDataObserveNotNullDetector.ISSUE,
+        LazyBundleDetector.ISSUE
     )
 }
