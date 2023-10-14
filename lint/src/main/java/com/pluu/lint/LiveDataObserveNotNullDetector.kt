@@ -1,6 +1,5 @@
 package com.pluu.lint
 
-import com.android.tools.lint.client.api.UElementHandler
 import com.android.tools.lint.detector.api.Category
 import com.android.tools.lint.detector.api.Detector
 import com.android.tools.lint.detector.api.Implementation
@@ -11,37 +10,45 @@ import com.android.tools.lint.detector.api.Scope
 import com.android.tools.lint.detector.api.Severity
 import com.android.tools.lint.detector.api.SourceCodeScanner
 import com.android.tools.lint.detector.api.isKotlin
+import com.intellij.psi.PsiMethod
+import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 import org.jetbrains.uast.UCallExpression
+import org.jetbrains.uast.ULambdaExpression
 import java.util.EnumSet
 
 class LiveDataObserveNotNullDetector : Detector(), SourceCodeScanner {
 
-    override fun getApplicableUastTypes() = listOf(
-        UCallExpression::class.java
-    )
+    override fun getApplicableMethodNames(): List<String> {
+        return listOf("observeNotNull")
+    }
 
-    override fun createUastHandler(context: JavaContext) = object : UElementHandler() {
-        override fun visitCallExpression(node: UCallExpression) {
-            if (!isKotlin(context.psiFile)) return
-            if (node.methodName != "observeNotNull") return
-            // Find Nothing LiveData
-            if (!nothingLiveDataCase.contains(node.receiverType?.canonicalText)) return
-
-            // Lint 7.0 이상부터 사용
-            val incident = Incident(context, ISSUE)
-                .message(message)
-                .at(node.methodIdentifier!!)
-                .fix(
-                    fix()
-                        .name("Use observe function")
-                        .replace()
-                        .text(node.methodName)
-                        .with("observe")
-                        .reformat(true)
-                        .build()
-                )
-            context.report(incident)
+    override fun visitMethodCall(context: JavaContext, node: UCallExpression, method: PsiMethod) {
+        super.visitMethodCall(context, node, method)
+        if (!isKotlin(context.psiFile)) return
+        val lambda = node.valueArguments.firstIsInstanceOrNull<ULambdaExpression>()
+            ?.valueParameters ?: return
+        if (lambda.size != 1) return
+        val firstParamType = lambda.first().type
+        if (firstParamType.canonicalText == "java.lang.Void") {
+            report(context, node)
         }
+    }
+
+    private fun report(context: JavaContext, node: UCallExpression) {
+        // Lint 7.0 이상부터 사용
+        val incident = Incident(context, ISSUE)
+            .message(message)
+            .at(node.methodIdentifier!!)
+            .fix(
+                fix()
+                    .name("Use observe function")
+                    .replace()
+                    .text(node.methodName)
+                    .with("observe")
+                    .reformat(true)
+                    .build()
+            )
+        context.report(incident)
     }
 
     companion object {
