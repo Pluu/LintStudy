@@ -10,6 +10,7 @@ import com.android.tools.lint.detector.api.Scope
 import com.android.tools.lint.detector.api.Severity
 import com.android.tools.lint.detector.api.SourceCodeScanner
 import com.android.tools.lint.detector.api.isKotlin
+import com.intellij.psi.PsiClassType
 import com.intellij.psi.PsiMethod
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 import org.jetbrains.uast.UCallExpression
@@ -25,6 +26,8 @@ class LiveDataObserveNotNullDetector : Detector(), SourceCodeScanner {
     override fun visitMethodCall(context: JavaContext, node: UCallExpression, method: PsiMethod) {
         super.visitMethodCall(context, node, method)
         if (!isKotlin(context.psiFile)) return
+        if (!isLiveDataReceiver(context, node)) return
+
         val lambda = node.valueArguments.firstIsInstanceOrNull<ULambdaExpression>()
             ?.valueParameters ?: return
         if (lambda.size != 1) return
@@ -32,6 +35,15 @@ class LiveDataObserveNotNullDetector : Detector(), SourceCodeScanner {
         if (firstParamType.canonicalText == "java.lang.Void") {
             report(context, node)
         }
+    }
+
+    private fun isLiveDataReceiver(context: JavaContext, node: UCallExpression): Boolean {
+        val psiClassType = (node.receiver?.getExpressionType() as? PsiClassType) ?: return false
+        return context.evaluator.extendsClass(
+            psiClassType.rawType().resolve(),
+            "androidx.lifecycle.LiveData",
+            false
+        )
     }
 
     private fun report(context: JavaContext, node: UCallExpression) {

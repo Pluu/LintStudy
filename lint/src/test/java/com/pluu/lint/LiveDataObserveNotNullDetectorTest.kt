@@ -22,7 +22,7 @@ import com.pluu.lintstudy.BaseActivity
 import com.pluu.lintstudy.utils.observeNotNull
 
 class SampleActivity : BaseActivity() {
-    private val stringLiveData: LiveData<String> = MutableLiveData<String>()
+    private val stringLiveData: LiveData<String?> = MutableLiveData<String?>()
     private val stringNullableLiveData: LiveData<String?> = MutableLiveData<String?>()
     private val unitLiveData: LiveData<Unit> = MutableLiveData<Unit>()
 
