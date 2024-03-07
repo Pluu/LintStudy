@@ -1,6 +1,6 @@
 [versions]
-agp = "8.2.0"
-lint = "31.2.0"
+agp = "8.3.0"
+lint = "31.3.0"
 kotlin = "1.9.21"
 
 [libraries]
