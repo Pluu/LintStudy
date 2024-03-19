@@ -1,7 +1,7 @@
 [versions]
-agp = "8.3.0"
-lint = "31.3.0"
-kotlin = "1.9.22"
+agp = "8.3.1"
+lint = "31.3.1"
+kotlin = "1.9.23"
 
 [libraries]
 android-material = "com.google.android.material:material:1.11.0"
