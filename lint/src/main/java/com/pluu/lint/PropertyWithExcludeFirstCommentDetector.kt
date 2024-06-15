@@ -10,11 +10,11 @@ import com.android.tools.lint.detector.api.Issue
 import com.android.tools.lint.detector.api.JavaContext
 import com.android.tools.lint.detector.api.Scope
 import com.android.tools.lint.detector.api.Severity
-import com.android.tools.lint.detector.api.isKotlin
 import com.intellij.psi.PsiComment
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiWhiteSpace
 import com.pluu.lint.util.classPackageName
+import com.pluu.lint.util.isKotlin
 import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.psi.psiUtil.allChildren
 import org.jetbrains.uast.UClass
@@ -26,7 +26,7 @@ class PropertyWithExcludeFirstCommentDetector : Detector(), Detector.UastScanner
 
     override fun createUastHandler(context: JavaContext) = object : UElementHandler() {
 
-        private val isKotlin = isKotlin(context.psiFile)
+        private val isKotlinFile = isKotlin(context.psiFile)
 
         override fun visitClass(node: UClass) {
             // 테스트 패키지내에서만 동작
@@ -44,7 +44,7 @@ class PropertyWithExcludeFirstCommentDetector : Detector(), Detector.UastScanner
 //            context.report(ISSUE, context.getNameLocation(node), node.asRecursiveLogString())
 
             for (field in node.fields) {
-                if (isKotlin) {
+                if (isKotlinFile) {
                     val property = (field.originalElement as? KtProperty) ?: continue
                     findField(property)
                 } else {

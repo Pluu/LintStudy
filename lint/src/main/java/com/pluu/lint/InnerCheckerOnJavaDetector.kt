@@ -9,10 +9,10 @@ import com.android.tools.lint.detector.api.Issue
 import com.android.tools.lint.detector.api.JavaContext
 import com.android.tools.lint.detector.api.Scope
 import com.android.tools.lint.detector.api.Severity
-import com.android.tools.lint.detector.api.isKotlin
 import com.intellij.psi.PsiType
 import com.pluu.lint.util.classPackageName
 import com.pluu.lint.util.findTypeAndGeneric
+import com.pluu.lint.util.isKotlin
 import org.jetbrains.uast.UClass
 import java.util.EnumSet
 
