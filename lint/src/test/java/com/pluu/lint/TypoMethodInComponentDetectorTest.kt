@@ -1,7 +1,6 @@
 package com.pluu.lint
 
 import com.android.tools.lint.checks.infrastructure.LintDetectorTest
-import com.android.tools.lint.checks.infrastructure.TestMode
 import com.pluu.lint.stubs.FRAGMENT_STUB
 import org.junit.Test
 
@@ -106,9 +105,8 @@ class TypoMethodInComponentDetectorTest : LintDetectorTest() {
             """.trimIndent()
         ).indented().within("src")
 
-        lint().files(
-            file
-        ).testModes(TestMode.UI_INJECTION_HOST)
+        lint()
+            .files(file)
             .run()
             .expect(
                 """
