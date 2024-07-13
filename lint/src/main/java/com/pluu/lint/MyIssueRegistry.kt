@@ -17,6 +17,7 @@ class MyIssueRegistry : IssueRegistry() {
         TypoMethodInComponentDetector.ISSUE,
         LiveDataObserveNotNullDetector.ISSUE,
         LazyBundleDetector.ISSUE,
-        DataBindingDuplicationDetector.ISSUE
+        DataBindingDuplicationDetector.ISSUE,
+        TwoMoreBlankLineDetector.ISSUE,
     )
 }
