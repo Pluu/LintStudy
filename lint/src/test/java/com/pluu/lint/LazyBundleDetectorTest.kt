@@ -1,7 +1,7 @@
 package com.pluu.lint
 
 import com.android.tools.lint.checks.infrastructure.LintDetectorTest
-import com.android.tools.lint.checks.infrastructure.LintDetectorTest.kotlin
+import com.android.tools.lint.checks.infrastructure.TestFiles.kotlin
 import org.junit.Test
 
 class LazyBundleDetectorTest : LintDetectorTest() {
