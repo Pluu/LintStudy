@@ -2,6 +2,7 @@
 agp = "8.5.1"
 lint = "31.5.1"
 kotlin = "1.9.24"
+compose-bom = "2024.06.00"
 
 [libraries]
 android-material = "com.google.android.material:material:1.12.0"
@@ -11,6 +12,14 @@ androidx-core = "androidx.core:core-ktx:1.13.1"
 androidx-lifecycle-viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.4"
 androidx-test-junit = "androidx.test.ext:junit:1.2.1"
 androidx-test-espresso = "androidx.test.espresso:espresso-core:3.6.1"
+
+androidX-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose-bom" }
+androidX-compose-foundation = { module = "androidx.compose.foundation:foundation" }
+androidX-compose-runtime = { module = "androidx.compose.runtime:runtime" }
+androidX-compose-tooling = { module = "androidx.compose.ui:ui-tooling" }
+androidX-compose-toolingPreview = { module = "androidx.compose.ui:ui-tooling-preview" }
+androidX-compose-ui = { module = "androidx.compose.ui:ui" }
+androidX-compose-uiTestManifest = { module = "androidx.compose.ui:ui-test-manifest" }
 
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
 
@@ -29,6 +38,18 @@ lint-compileOnly = [
 lint-test = [
     "lint",
     "lint-tests"
+]
+
+androidX-compose = [
+    "androidX-compose-foundation",
+    "androidX-compose-runtime",
+    "androidX-compose-toolingPreview",
+    "androidX-compose-ui",
+]
+
+androidX-compose-debug = [
+    "androidX-compose-tooling",
+    "androidX-compose-uiTestManifest"
 ]
 
 [plugins]

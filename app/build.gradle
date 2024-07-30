@@ -34,6 +34,16 @@ android {
 
     buildFeatures {
         dataBinding = true
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.14"
+    }
+
+    lintOptions {
+        checkDependencies true
+        ignoreTestSources true
     }
 }
 
@@ -49,4 +59,8 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.junit)
     androidTestImplementation(libs.androidx.test.espresso)
+
+    implementation(platform(libs.androidX.compose.bom))
+    implementation(libs.bundles.androidX.compose)
+    debugImplementation(libs.bundles.androidX.compose.debug)
 }
