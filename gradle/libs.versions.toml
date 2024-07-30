@@ -22,6 +22,7 @@ androidX-compose-ui = { module = "androidx.compose.ui:ui" }
 androidX-compose-uiTestManifest = { module = "androidx.compose.ui:ui-test-manifest" }
 
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
+kotlin-metadata-jvm = { module = "org.jetbrains.kotlinx:kotlinx-metadata-jvm", version = "0.9.0" }
 
 junit = "junit:junit:4.13.2"
 

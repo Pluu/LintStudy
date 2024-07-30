@@ -8,8 +8,10 @@ dependencies {
     // Lint
     compileOnly(libs.bundles.lint.compileOnly)
     compileOnly(libs.kotlin.stdlib)
-    testImplementation(libs.bundles.lint.test)
 
+    api(libs.kotlin.metadata.jvm) { exclude group: "org.jetbrains.kotlin" }
+
+    testImplementation(libs.bundles.lint.test)
     testImplementation(libs.junit)
 }
 
