@@ -3,6 +3,7 @@ package com.pluu.lint.compose
 import androidx.compose.lint.Names
 import androidx.compose.lint.inheritsFrom
 import androidx.compose.lint.isComposable
+import androidx.compose.lint.isComposablePreview
 import androidx.compose.lint.returnsUnit
 import com.android.tools.lint.client.api.UElementHandler
 import com.android.tools.lint.detector.api.Category
@@ -27,6 +28,8 @@ class RequiredModifierParameterDetector : Detector(), SourceCodeScanner {
             override fun visitMethod(node: UMethod) {
                 // Ignore non-composable functions
                 if (!node.isComposable) return
+                // Ignore composable preview functions
+                if (node.isComposablePreview) return
                 // Ignore non-unit composable functions
                 if (!node.returnsUnit) return
                 // Ignore private composable functions

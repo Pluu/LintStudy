@@ -62,5 +62,6 @@ dependencies {
 
     implementation(platform(libs.androidX.compose.bom))
     implementation(libs.bundles.androidX.compose)
+    debugImplementation(platform(libs.androidX.compose.bom))
     debugImplementation(libs.bundles.androidX.compose.debug)
 }

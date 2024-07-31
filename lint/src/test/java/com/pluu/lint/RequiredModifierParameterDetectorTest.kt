@@ -64,4 +64,29 @@ fun SampleSuccess(text: String) {
                 """.trimIndent()
             )
     }
+
+    @Test
+    fun testPreviewSuccess() {
+        lint()
+            .files(
+                kotlin(
+                    """
+package com.pluu.lintstudy.compose
+
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.tooling.preview.Preview
+
+@Preview
+@Composable
+fun SampleSuccess() {
+}
+            """
+                ),
+                ComposeStubs.Composable,
+                ComposeStubs.Modifier,
+                ComposeStubs.Preview,
+            )
+            .run()
+            .expectClean()
+    }
 }

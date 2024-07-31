@@ -33,6 +33,10 @@ object Names {
         val PackageName = Package("androidx.compose.animation.core")
     }
 
+    object ToolingPreview {
+        val Preview = Name(Package("androidx.compose.ui.tooling.preview"), "Preview")
+    }
+
     object Runtime {
         val PackageName = Package("androidx.compose.runtime")
 

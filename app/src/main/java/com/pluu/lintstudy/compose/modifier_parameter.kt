@@ -3,6 +3,7 @@ package com.pluu.lintstudy.compose
 import androidx.compose.foundation.text.BasicText
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun SampleSuccess(text: String, modifier: Modifier) {
@@ -17,4 +18,10 @@ fun SampleFailure(text: String) {
 @Composable
 private fun Sample3(text: String) {
     BasicText(text = text)
+}
+
+@Preview
+@Composable
+fun SampleFailure4() {
+
 }

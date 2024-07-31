@@ -25,6 +25,21 @@ import org.intellij.lang.annotations.Language
 import java.util.Locale
 
 object ComposeStubs {
+    val Preview: TestFile =
+        kotlin(
+            """
+package androidx.compose.ui.tooling.preview
+
+@MustBeDocumented
+@Retention(AnnotationRetention.BINARY)
+@Target(
+    AnnotationTarget.ANNOTATION_CLASS,
+    AnnotationTarget.FUNCTION
+)
+@Repeatable
+annotation class Preview
+            """.trimIndent()
+        )
     val Composable: TestFile =
         bytecodeStub(
             filename = "Composable.kt",
