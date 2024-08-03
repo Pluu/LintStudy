@@ -102,7 +102,7 @@ val PsiMethod.isComposable
     get() = annotations.any { it.qualifiedName == Names.Runtime.Composable.javaFqn }
 
 val PsiMethod.isComposablePreview
-    get() = annotations.any { it.qualifiedName == Names.ToolingPreview.Preview.javaFqn }
+    get() = annotations.any { it.qualifiedName?.contains("Preview") == true }
 
 /** Returns whether this variable's type is @Composable or not */
 val UVariable.isComposable: Boolean

@@ -4,6 +4,7 @@ import androidx.compose.foundation.text.BasicText
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 
 @Composable
 fun SampleSuccess(text: String, modifier: Modifier) {
@@ -23,5 +24,11 @@ private fun Sample3(text: String) {
 @Preview
 @Composable
 fun SampleFailure4() {
+
+}
+
+@PreviewLightDark
+@Composable
+fun SampleFailure5() {
 
 }
