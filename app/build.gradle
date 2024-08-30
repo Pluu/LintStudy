@@ -41,7 +41,7 @@ android {
         kotlinCompilerExtensionVersion = "1.5.14"
     }
 
-    lintOptions {
+    lint {
         checkDependencies true
         ignoreTestSources true
     }
