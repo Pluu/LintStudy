@@ -1,5 +1,9 @@
 package com.pluu.lint
 
+import androidx.compose.lint.Name
+import androidx.compose.lint.Package
+import androidx.compose.lint.inheritsFrom
+import com.android.tools.lint.client.api.UElementHandler
 import com.android.tools.lint.detector.api.Category
 import com.android.tools.lint.detector.api.Detector
 import com.android.tools.lint.detector.api.Implementation
@@ -9,40 +13,38 @@ import com.android.tools.lint.detector.api.JavaContext
 import com.android.tools.lint.detector.api.Scope
 import com.android.tools.lint.detector.api.Severity
 import com.android.tools.lint.detector.api.SourceCodeScanner
-import org.jetbrains.uast.UClass
 import org.jetbrains.uast.UMethod
 import java.util.EnumSet
 
 class TypoMethodInComponentDetector : Detector(), SourceCodeScanner {
 
-    override fun applicableSuperClasses(): List<String> = listOf(
-        "android.app.Activity",
-        "androidx.fragment.app.Fragment",
-        "android.view.View"
-    )
+    override fun getApplicableUastTypes() = listOf(UMethod::class.java)
 
-    override fun visitClass(context: JavaContext, declaration: UClass) {
-        super.visitClass(context, declaration)
+    override fun createUastHandler(context: JavaContext) =
+        object : UElementHandler() {
+            override fun visitMethod(node: UMethod) {
+                val containingClass = node.containingClass ?: return
+                if (detectClasses.none { containingClass.inheritsFrom(it) }) {
+                    return
+                }
 
-        declaration.methods.asSequence()
-            .forEach { method ->
-                val methodName = method.name
+                val methodName = node.name
 
                 val findSetUpViews = setUpViews_method.equals(methodName, ignoreCase = true)
                 val findSetUpObservers = setUpObservers_method.equals(methodName, ignoreCase = true)
                 if (findSetUpViews || findSetUpObservers) {
                     if (findSetUpViews) {
                         if (setUpViews_method != methodName) {
-                            report(context, method, setUpViews_method)
+                            report(context, node, setUpViews_method)
                         }
-                    } else if (findSetUpObservers) {
+                    } else {
                         if (setUpObservers_method != methodName) {
-                            report(context, method, setUpObservers_method)
+                            report(context, node, setUpObservers_method)
                         }
                     }
                 }
             }
-    }
+        }
 
     private fun report(context: JavaContext, method: UMethod, fixName: String) {
         val fix = fix().replace()
@@ -57,6 +59,11 @@ class TypoMethodInComponentDetector : Detector(), SourceCodeScanner {
     }
 
     companion object {
+        private val detectClasses = arrayOf(
+            Name(Package("android.app"), "Activity"),
+            Name(Package("androidx.fragment.app"), "Fragment"),
+            Name(Package("android.view"), "View")
+        )
 
         private const val setUpViews_method = "setUpViews"
         private const val setUpObservers_method = "setUpObservers"
