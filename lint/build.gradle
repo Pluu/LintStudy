@@ -21,9 +21,3 @@ jar {
         attributes("Lint-Registry-v2": "com.pluu.lint.MyIssueRegistry")
     }
 }
-
-test {
-    // https://docs.gradle.org/current/dsl/org.gradle.api.tasks.testing.Test.html#org.gradle.api.tasks.testing.Test:maxParallelForks
-    def forkCounts = (Runtime.getRuntime().availableProcessors() / 2).intValue()
-    maxParallelForks = Math.max(1, forkCounts)
-}
