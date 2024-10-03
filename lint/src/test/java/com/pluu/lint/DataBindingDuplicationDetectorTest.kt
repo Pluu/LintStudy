@@ -34,6 +34,7 @@ class SampleView {
                 )
                     .indented(),
             )
+            .allowDuplicates()
             .run()
             .expect(
                 """
@@ -65,6 +66,7 @@ class SampleView {
                 )
                     .indented(),
             )
+            .allowDuplicates()
             .run()
             .expectClean()
     }
@@ -96,6 +98,7 @@ fun setTest3(view: View, value: Int) {
                 )
                     .indented(),
             )
+            .allowDuplicates()
             .run()
             .expectClean()
     }
