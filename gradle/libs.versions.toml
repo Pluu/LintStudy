@@ -2,11 +2,11 @@
 agp = "8.7.1"
 lint = "31.7.1"
 kotlin = "1.9.25"
-compose-bom = "2024.09.03"
+compose-bom = "2024.10.00"
 
 [libraries]
 android-material = "com.google.android.material:material:1.12.0"
-androidx-activity = "androidx.activity:activity-ktx:1.9.2"
+androidx-activity = "androidx.activity:activity-ktx:1.9.3"
 androidx-appcompat = "androidx.appcompat:appcompat:1.7.0"
 androidx-core = "androidx.core:core-ktx:1.13.1"
 androidx-lifecycle-viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.6"
