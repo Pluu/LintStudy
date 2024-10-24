@@ -21,5 +21,6 @@ class MyIssueRegistry : IssueRegistry() {
         DataBindingDuplicationDetector.ISSUE,
         TwoMoreBlankLineDetector.ISSUE,
         RequiredModifierParameterDetector.ISSUE,
+        OnCreateSuperCallDetector.ISSUE,
     )
 }
