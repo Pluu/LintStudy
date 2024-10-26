@@ -6,7 +6,10 @@ import com.android.tools.lint.detector.api.Detector
 import com.android.tools.lint.detector.api.Issue
 import com.pluu.lint.compose.RequiredModifierParameterDetector
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.junit.runners.JUnit4
 
+@RunWith(JUnit4::class)
 class RequiredModifierParameterDetectorTest : LintDetectorTest() {
     override fun getDetector(): Detector = RequiredModifierParameterDetector()
 

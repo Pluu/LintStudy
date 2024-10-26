@@ -3,7 +3,10 @@ package com.pluu.lint
 import com.android.tools.lint.checks.infrastructure.LintDetectorTest
 import com.android.tools.lint.checks.infrastructure.TestFiles.kotlin
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.junit.runners.JUnit4
 
+@RunWith(JUnit4::class)
 class LazyBundleDetectorTest : LintDetectorTest() {
 
     override fun getDetector() = LazyBundleDetector()
