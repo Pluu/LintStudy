@@ -1,5 +1,6 @@
 package com.pluu.lint
 
+import com.android.SdkConstants
 import com.android.tools.lint.client.api.UElementHandler
 import com.android.tools.lint.detector.api.Category
 import com.android.tools.lint.detector.api.Detector
@@ -8,6 +9,9 @@ import com.android.tools.lint.detector.api.Issue
 import com.android.tools.lint.detector.api.JavaContext
 import com.android.tools.lint.detector.api.Scope
 import com.android.tools.lint.detector.api.Severity
+import com.intellij.psi.PsiClass
+import com.intellij.psi.util.InheritanceUtil
+import com.pluu.lint.util.isKotlin
 import org.jetbrains.uast.UCallExpression
 import org.jetbrains.uast.UIfExpression
 import org.jetbrains.uast.UMethod
@@ -20,16 +24,25 @@ class OnCreateSuperCallDetector : Detector(), Detector.UastScanner {
 
     override fun getApplicableUastTypes() = listOf(UMethod::class.java)
 
-    override fun createUastHandler(context: JavaContext) = object : UElementHandler() {
-        override fun visitMethod(node: UMethod) {
-            if (node.name != "onCreate") return
+    override fun createUastHandler(context: JavaContext): UElementHandler? {
+        if (!isKotlin(context.psiFile)) return null
+        return object : UElementHandler() {
+            override fun visitMethod(node: UMethod) {
+                // Activity 하위가 아닌 경우는 탐지 안함
+                val psiClass = node.containingClass ?: return
+                if (!findAInheritanceActivity(psiClass)) return
 
-            val visitor = AbortCheckVisitor()
-            node.uastBody?.accept(visitor)
-            if (visitor.abortCount > 0) {
-                context.report(ISSUE, node, context.getNameLocation(node), message)
+                val visitor = AbortCheckVisitor()
+                node.uastBody?.accept(visitor)
+                if (visitor.abortCount > 0) {
+                    context.report(ISSUE, node, context.getNameLocation(node), message)
+                }
             }
         }
+    }
+
+    private fun findAInheritanceActivity(psiClass: PsiClass): Boolean {
+        return InheritanceUtil.isInheritor(psiClass, SdkConstants.CLASS_ACTIVITY)
     }
 
     private class AbortCheckVisitor : AbstractUastVisitor() {

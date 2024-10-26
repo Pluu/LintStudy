@@ -32,3 +32,11 @@ class SampleActivity2 : AppCompatActivity() {
         finish()
     }
 }
+
+class NoneActivity {
+    fun onCreate(savedInstanceState: Bundle?) {
+        finish()
+    }
+
+    private fun finish() {}
+}

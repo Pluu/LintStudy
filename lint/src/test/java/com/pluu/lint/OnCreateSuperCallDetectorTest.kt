@@ -91,7 +91,7 @@ super.onCreate(savedInstanceState)
         runActivityLint(testFile)
             .expect(
                 """
-src/com/example/CustomActivity.kt:6: Error: OnCreateSuperCallDetector [OnCreateSuperCallDetector]
+src/com/example/CustomActivity.kt:7: Error: OnCreateSuperCallDetector [OnCreateSuperCallDetector]
     override fun onCreate(savedInstanceState: Bundle?) {
                  ~~~~~~~~
 1 errors, 0 warnings
@@ -119,6 +119,31 @@ src/com/example/CustomActivity.kt:7: Error: OnCreateSuperCallDetector [OnCreateS
             )
     }
 
+    @Test
+    fun testNotActivity() {
+        val testFile = kotlin(
+            "com/example/CustomActivity.kt",
+            """
+package com.example
+
+import android.os.Bundle
+
+class CustomActivity {
+    fun onCreate(savedInstanceState: Bundle?) {
+        finish()
+    }
+
+    private fun finish() {}
+}
+            """
+        )
+            .indented()
+
+        lint().files(testFile)
+            .run()
+            .expectClean()
+    }
+
     ///////////////////////////////////////////////////////////////////////////
     // Fail condition
     ///////////////////////////////////////////////////////////////////////////
@@ -140,7 +165,7 @@ super.onCreate(savedInstanceState)
         runActivityLint(testFile)
             .expect(
                 """
-src/com/example/CustomActivity.kt:6: Error: OnCreateSuperCallDetector [OnCreateSuperCallDetector]
+src/com/example/CustomActivity.kt:7: Error: OnCreateSuperCallDetector [OnCreateSuperCallDetector]
     override fun onCreate(savedInstanceState: Bundle?) {
                  ~~~~~~~~
 1 errors, 0 warnings
@@ -153,6 +178,7 @@ src/com/example/CustomActivity.kt:6: Error: OnCreateSuperCallDetector [OnCreateS
         """
 package com.example
 
+import android.app.Activity
 import android.os.Bundle
 
 class CustomActivity: Activity() {
@@ -187,30 +213,13 @@ ${builder()}
         .indented()
         .within("src")
 
-    private fun secondActivity(): TestFile = kotlin(
-        "com/example/SecondActivity.kt",
-        """
-package com.example
-
-import android.os.Bundle
-
-class SecondActivity: Activity() {
-    companion object {
-        fun start(context: Context) {}
-    }
-}
-            """
-    )
-        .indented()
-        .within("src")
-
     private fun runActivityLint(classFile: TestFile): TestLintResult {
-        return lint().files(classFile, secondActivity())
+        return lint().files(classFile)
             .run()
     }
 
     private fun runAppCompatLint(classFile: TestFile): TestLintResult {
-        return lint().files(AppCompatStub.APPCOMPAT_ACTIVITY, classFile, secondActivity())
+        return lint().files(AppCompatStub.APPCOMPAT_ACTIVITY, classFile)
             .run()
     }
 }
