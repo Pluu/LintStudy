@@ -132,7 +132,7 @@ API Guide line : [Elements accept and respect a Modifier parameter](https://andr
 
 > Detector Source : https://github.com/Pluu/LintStudy/blob/master/lint/src/main/java/com/pluu/lint/OnCreateSuperCallDetector.kt
 
-|                             코드                             |                          Lint 결과                           |
-| :----------------------------------------------------------: | :----------------------------------------------------------: |
-| ![OnCreateSuper_1](/Users/pluu/PluuProject/LintStudy/arts/OnCreateSuper_1.png) | ![OnCreateSuper_2](/Users/pluu/PluuProject/LintStudy/arts/OnCreateSuper_2.png) |
+|                  코드                  |               Lint 결과                |
+| :------------------------------------: | :------------------------------------: |
+| <img src="arts/OnCreateSuper_1.png" /> | <img src="arts/OnCreateSuper_2.png" /> |
 
