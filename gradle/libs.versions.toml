@@ -1,8 +1,8 @@
 [versions]
 agp = "8.8.0-rc01"
 lint = "31.8.0-rc01"
-kotlin = "2.0.21"
-compose-bom = "2024.11.00"
+kotlin = "2.1.0"
+compose-bom = "2024.12.01"
 
 [libraries]
 android-material = "com.google.android.material:material:1.12.0"
