@@ -47,7 +47,7 @@ class DataBindingDuplicationDetector : Detector(), Detector.UastScanner {
             "androidx.databinding.BindingAdapter"
         )
 
-        private val jvmStaticAnnotation = "kotlin.jvm.JvmStatic"
+        private const val jvmStaticAnnotation = "kotlin.jvm.JvmStatic"
 
         private const val message = "복수 DataBinding 생성으로 IDE 경고가 발생합니다."
 
