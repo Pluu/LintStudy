@@ -1,7 +1,7 @@
 [versions]
 agp = "8.10.0"
 lint = "31.10.0"
-kotlin = "2.1.20"
+kotlin = "2.1.21"
 compose-bom = "2025.05.00"
 
 [libraries]
