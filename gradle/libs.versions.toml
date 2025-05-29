@@ -1,6 +1,6 @@
 [versions]
-agp = "8.10.0"
-lint = "31.10.0"
+agp = "8.10.1"
+lint = "31.10.1"
 kotlin = "2.1.21"
 compose-bom = "2025.05.00"
 
