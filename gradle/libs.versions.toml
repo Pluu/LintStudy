@@ -1,7 +1,7 @@
 [versions]
 agp = "8.11.0"
 lint = "31.11.0"
-kotlin = "2.1.21"
+kotlin = "2.2.0"
 compose-bom = "2025.06.01"
 
 [libraries]
@@ -58,3 +58,4 @@ android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
