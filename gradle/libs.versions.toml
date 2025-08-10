@@ -15,6 +15,7 @@ androidx-test-espresso = "androidx.test.espresso:espresso-core:3.7.0"
 
 androidX-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose-bom" }
 androidX-compose-foundation = { module = "androidx.compose.foundation:foundation" }
+androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidX-compose-runtime = { module = "androidx.compose.runtime:runtime" }
 androidX-compose-tooling = { module = "androidx.compose.ui:ui-tooling" }
 androidX-compose-toolingPreview = { module = "androidx.compose.ui:ui-tooling-preview" }
@@ -46,6 +47,7 @@ androidX-compose = [
     "androidX-compose-runtime",
     "androidX-compose-toolingPreview",
     "androidX-compose-ui",
+    "androidx-compose-material3",
 ]
 
 androidX-compose-debug = [
