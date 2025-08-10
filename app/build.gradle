@@ -5,6 +5,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -64,6 +65,7 @@ dependencies {
     androidTestImplementation(libs.androidx.test.espresso)
 
     implementation libs.timber
+    implementation libs.kotlinx.serialization.json
 
     implementation(platform(libs.androidX.compose.bom))
     implementation(libs.bundles.androidX.compose)
