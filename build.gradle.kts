@@ -7,7 +7,7 @@ plugins {
     alias(libs.plugins.kotlin.serialization) apply false
 }
 
-tasks.register('clean', Delete) {
-    delete rootProject.buildDir
-    finalizedBy(':lint:assemble')
+tasks.register<Delete>("clean") {
+    delete(rootProject.buildDir)
+    finalizedBy(":lint:assemble")
 }

@@ -1,38 +1,41 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-    id 'com.android.application'
-    id 'org.jetbrains.kotlin.android'
-    id 'kotlin-kapt'
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    id("kotlin-kapt")
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.serialization)
 }
 
 android {
-    namespace 'com.pluu.lintstudy'
+    namespace = "com.pluu.lintstudy"
     compileSdk {
         version = release(36)
     }
 
     defaultConfig {
-        applicationId "com.pluu.lintstudy"
-        minSdk 21
-        targetSdk 36
-        versionCode 1
-        versionName "1.0"
+        applicationId = "com.pluu.lintstudy"
+        minSdk = 21
+        targetSdk = 36
+        versionCode = 1
+        versionName = "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     buildFeatures {
@@ -41,8 +44,8 @@ android {
     }
 
     lint {
-        checkDependencies true
-        ignoreTestSources true
+        checkDependencies = true
+        ignoreTestSources = true
     }
 }
 
@@ -53,7 +56,7 @@ kotlin {
 }
 
 dependencies {
-    lintChecks project(':lint')
+    lintChecks(project(":lint"))
 
     implementation(libs.androidx.activity)
     implementation(libs.androidx.activity.compose)
@@ -66,8 +69,8 @@ dependencies {
     androidTestImplementation(libs.androidx.test.junit)
     androidTestImplementation(libs.androidx.test.espresso)
 
-    implementation libs.timber
-    implementation libs.kotlinx.serialization.json
+    implementation(libs.timber)
+    implementation(libs.kotlinx.serialization.json)
 
     implementation(platform(libs.androidX.compose.bom))
     implementation(libs.bundles.androidX.compose)

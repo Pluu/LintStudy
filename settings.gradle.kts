@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-include ':lint'
-include ':app'
 rootProject.name = "LintStudy"
+include(":lint")
+include(":app")
