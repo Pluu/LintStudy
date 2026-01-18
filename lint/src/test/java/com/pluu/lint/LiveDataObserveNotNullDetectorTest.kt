@@ -15,7 +15,6 @@ class LiveDataObserveNotNullDetectorTest {
             BaseActivity,
             kotlin(
                 """
-import androidx.activity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.pluu.lintstudy.BaseActivity

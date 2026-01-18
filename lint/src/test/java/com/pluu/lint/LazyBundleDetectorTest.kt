@@ -2,6 +2,7 @@ package com.pluu.lint
 
 import com.android.tools.lint.checks.infrastructure.LintDetectorTest
 import com.android.tools.lint.checks.infrastructure.TestFiles.kotlin
+import com.android.tools.lint.checks.infrastructure.TestMode
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -40,7 +41,8 @@ data class Sample(val a: String)
         lint().files(
             extension_Stub,
             activityFile
-        ).run()
+        ).skipTestModes(TestMode.TYPE_ALIAS)
+            .run()
             .expectClean()
     }
 
@@ -63,7 +65,8 @@ class LazySampleActivity : Activity() {
         lint().files(
             extension_Stub,
             activityFile
-        ).run()
+        ).skipTestModes(TestMode.TYPE_ALIAS)
+            .run()
             .expect(
                 """
 src/com/pluu/lintstudy/lazybundle/LazySampleActivity.kt:7: Error: Lazy한 값을 클래스 인스턴스화 시점에 사용하면 안됨 [LazyDetector]
