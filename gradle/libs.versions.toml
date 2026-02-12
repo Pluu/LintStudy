@@ -3,8 +3,8 @@ agp = "9.0.0"
 lint = "32.0.0"
 kotlin = "2.3.0"
 kotlinxSerialization = "1.10.0"
-compose-bom = "2026.01.01"
-activity = "1.12.3"
+compose-bom = "2026.02.00"
+activity = "1.12.4"
 timber = "5.0.1"
 
 [libraries]
