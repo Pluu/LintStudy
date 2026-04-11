@@ -2,7 +2,7 @@
 agp = "9.1.0"
 lint = "32.1.0"
 kotlin = "2.3.20"
-kotlinxSerialization = "1.10.0"
+kotlinxSerialization = "1.11.0"
 compose-bom = "2026.03.01"
 activity = "1.13.0"
 timber = "5.0.1"
