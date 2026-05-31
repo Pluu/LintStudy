@@ -3,12 +3,12 @@ agp = "9.2.1"
 lint = "32.2.1"
 kotlin = "2.3.21"
 kotlinxSerialization = "1.11.0"
-compose-bom = "2026.05.00"
+compose-bom = "2026.05.01"
 activity = "1.13.0"
 timber = "5.0.1"
 
 [libraries]
-android-material = "com.google.android.material:material:1.13.0"
+android-material = "com.google.android.material:material:1.14.0"
 androidx-activity = { module = "androidx.activity:activity-ktx", version.ref = "activity" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity" }
 androidx-appcompat = "androidx.appcompat:appcompat:1.7.1"
