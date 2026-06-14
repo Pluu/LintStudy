@@ -10,7 +10,7 @@ plugins {
 android {
     namespace = "com.pluu.lintstudy"
     compileSdk {
-        version = release(36)
+        version = release(37)
     }
 
     defaultConfig {
