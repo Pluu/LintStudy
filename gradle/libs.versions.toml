@@ -1,9 +1,9 @@
 [versions]
-agp = "9.3.0-rc01"
-lint = "32.3.0-rc01"
+agp = "9.3.0-rc02"
+lint = "32.3.0-rc02"
 kotlin = "2.4.0"
 kotlinxSerialization = "1.11.0"
-compose-bom = "2026.06.00"
+compose-bom = "2026.06.01"
 activity = "1.13.0"
 timber = "5.0.1"
 
