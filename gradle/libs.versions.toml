@@ -1,7 +1,7 @@
 [versions]
 agp = "9.4.0"
 lint = "32.4.0"
-kotlin = "2.4.10"
+kotlin = "2.4.20"
 kotlinxSerialization = "1.11.0"
 compose-bom = "2026.08.00"
 activity = "1.13.0"
